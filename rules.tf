@@ -38,9 +38,13 @@ variable "rules" {
     dns-udp = [53, 53, "udp", "DNS"]
     dns-tcp = [53, 53, "tcp", "DNS"]
 
-    # Elasticsearch
+    # ELK - Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
+    # ELK - Kibana
+    kibana-tcp = [9000, 9000, "tcp", "Kibana"]
+    # ELK - Logstash
+    logstash-tcp = [5043, 5044, "tcp", "Logstash"]
 
     # HTTP
     http-80-tcp   = [80, 80, "tcp", "HTTP"]
@@ -58,6 +62,9 @@ variable "rules" {
     # Memcached
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
 
+    # MongoDB
+    mongodb-tcp   = [27017, 27017, "tcp", "MongoDB"]
+
     # MySQL
     mysql-tcp = [3306, 3306, "tcp", "MySQL/Aurora"]
 
@@ -74,6 +81,9 @@ variable "rules" {
     openvpn-udp       = [1194, 1194, "udp", "OpenVPN"]
     openvpn-tcp       = [943, 943, "tcp", "OpenVPN"]
     openvpn-https-tcp = [443, 443, "tcp", "OpenVPN"]
+
+    # Portainer
+    portainer-tcp = [5601, 5601, "tcp", "Portainer"]
 
     # PostgreSQL
     postgresql-tcp = [5432, 5432, "tcp", "PostgreSQL"]

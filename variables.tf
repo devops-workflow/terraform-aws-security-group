@@ -1,3 +1,13 @@
+// Standard Variables
+
+variable "environment" {
+  description = "Environment (ex: dev, qa, stage, prod)"
+}
+variable "namespaced" {
+  description = "Namespace all resources (prefixed with the environment)?"
+  default     = true
+}
+
 #################
 # Security group
 #################

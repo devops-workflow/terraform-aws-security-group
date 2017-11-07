@@ -2,11 +2,21 @@
 # Security group
 #################
 resource "aws_security_group" "this" {
-  name        = "${var.name}"
+  name = "${var.namespaced ? format("%s-%s", var.environment, var.name) : format("%s", var.name)}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
 
-  tags = "${merge(var.tags, map("Name", format("%s", var.name)))}"
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = "${ merge(
+    var.tags,
+    map("Name", var.namespaced ?
+     format("%s-%s", var.environment, var.name) :
+     format("%s", var.name) ),
+    map("Environment", var.environment),
+    map("Terraform", "true") )}"
 }
 
 ###################################
@@ -184,4 +194,3 @@ resource "aws_security_group_rule" "egress_with_self" {
 ################
 # End of egress
 ################
-

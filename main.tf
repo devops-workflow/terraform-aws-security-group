@@ -1,6 +1,8 @@
 #
 # Setup AWS Security Group and rules
 #
+# https://www.terraform.io/docs/providers/aws/r/security_group.html
+# https://www.terraform.io/docs/providers/aws/r/security_group_rule.html
 
 module "enabled" {
   source  = "devops-workflow/boolean/local"

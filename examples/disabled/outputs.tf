@@ -1,4 +1,4 @@
-output "this_security_group_id" {
+output "id" {
   description = "The ID of the security group"
-  value       = "${module.complete_sg_disabled.this_security_group_id}"
+  value       = "${module.complete_sg_disabled.id}"
 }

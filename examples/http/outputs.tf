@@ -1,24 +1,24 @@
-output "this_security_group_id" {
+output "id" {
   description = "The ID of the security group"
-  value       = "${module.http_sg.this_security_group_id}"
+  value       = "${module.http_sg.id}"
 }
 
-output "this_security_group_vpc_id" {
+output "vpc_id" {
   description = "The VPC ID"
-  value       = "${module.http_sg.this_security_group_vpc_id}"
+  value       = "${module.http_sg.vpc_id}"
 }
 
-output "this_security_group_owner_id" {
+output "owner_id" {
   description = "The owner ID"
-  value       = "${module.http_sg.this_security_group_owner_id}"
+  value       = "${module.http_sg.owner_id}"
 }
 
-output "this_security_group_name" {
+output "name" {
   description = "The name of the security group"
-  value       = "${module.http_sg.this_security_group_name}"
+  value       = "${module.http_sg.name}"
 }
 
-output "this_security_group_description" {
+output "description" {
   description = "The description of the security group"
-  value       = "${module.http_sg.this_security_group_description}"
+  value       = "${module.http_sg.description}"
 }

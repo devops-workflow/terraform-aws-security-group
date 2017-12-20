@@ -18,9 +18,9 @@ data "aws_security_group" "default" {
 # Security group with complete set of arguments
 ################################################
 module "complete_sg" {
-  source = "../../"
-
+  source      = "../../"
   name        = "complete-sg"
+  environment = "testy"
   description = "Security group with all available arguments set (this is just an example)"
   vpc_id      = "${data.aws_vpc.default.id}"
 
@@ -186,9 +186,9 @@ module "complete_sg" {
 # Security group with IPv4 and IPv6 sets of arguments
 ######################################################
 module "ipv4_ipv6_example" {
-  source = "../../"
-
+  source      = "../../"
   name        = "ipv4-ipv6-example"
+  environment = "testy"
   description = "IPv4 and IPv6 example"
   vpc_id      = "${data.aws_vpc.default.id}"
 

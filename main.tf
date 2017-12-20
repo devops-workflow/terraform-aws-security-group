@@ -1,24 +1,38 @@
+#
+# Setup AWS Security Group and rules
+#
+
+module "enabled" {
+  source  = "devops-workflow/boolean/local"
+  version = "0.1.0"
+  value   = "${var.enabled}"
+}
+
+module "label" {
+  source        = "devops-workflow/label/local"
+  version       = "0.1.0"
+  organization  = "${var.organization}"
+  name          = "${var.name}"
+  namespace-env = "${var.namespace-env}"
+  namespace-org = "${var.namespace-org}"
+  environment   = "${var.environment}"
+  delimiter     = "${var.delimiter}"
+  attributes    = "${var.attributes}"
+  tags          = "${var.tags}"
+}
+
 #################
 # Security group
 #################
 resource "aws_security_group" "this" {
-  count = "${var.create}"
-
-  name        = "${var.name}"
+  count       = "${module.enabled.value}"
+  name        = "${module.label.id}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
-
+  tags        = "${module.label.tags}"
   lifecycle {
     create_before_destroy = true
   }
-
-  tags = "${ merge(
-    var.tags,
-    map("Name", var.namespaced ?
-     format("%s-%s", var.environment, var.name) :
-     format("%s", var.name) ),
-    map("Environment", var.environment),
-    map("Terraform", "true") )}"
 }
 
 ###################################
@@ -26,7 +40,7 @@ resource "aws_security_group" "this" {
 ###################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "ingress_rules" {
-  count = "${var.create ? length(var.ingress_rules) : 0}"
+  count = "${module.enabled.value ? length(var.ingress_rules) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -45,7 +59,7 @@ resource "aws_security_group_rule" "ingress_rules" {
 ##########################
 # Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
 resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
-  count = "${var.create ? length(var.ingress_with_source_security_group_id) : 0}"
+  count = "${module.enabled.value ? length(var.ingress_with_source_security_group_id) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -61,7 +75,7 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
 
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
-  count = "${var.create ? length(var.ingress_with_cidr_blocks) : 0}"
+  count = "${module.enabled.value ? length(var.ingress_with_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -76,7 +90,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
-  count = "${var.create ? length(var.ingress_with_ipv6_cidr_blocks) : 0}"
+  count = "${module.enabled.value ? length(var.ingress_with_ipv6_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -91,7 +105,7 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
 resource "aws_security_group_rule" "ingress_with_self" {
-  count = "${var.create ? length(var.ingress_with_self) : 0}"
+  count = "${module.enabled.value ? length(var.ingress_with_self) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -114,7 +128,7 @@ resource "aws_security_group_rule" "ingress_with_self" {
 ##################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "egress_rules" {
-  count = "${var.create ? length(var.egress_rules) : 0}"
+  count = "${module.enabled.value ? length(var.egress_rules) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -133,7 +147,7 @@ resource "aws_security_group_rule" "egress_rules" {
 #########################
 # Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
 resource "aws_security_group_rule" "egress_with_source_security_group_id" {
-  count = "${var.create ? length(var.egress_with_source_security_group_id) : 0}"
+  count = "${module.enabled.value ? length(var.egress_with_source_security_group_id) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -149,7 +163,7 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
 
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "egress_with_cidr_blocks" {
-  count = "${var.create ? length(var.egress_with_cidr_blocks) : 0}"
+  count = "${module.enabled.value ? length(var.egress_with_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -164,7 +178,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
-  count = "${var.create ? length(var.egress_with_ipv6_cidr_blocks) : 0}"
+  count = "${module.enabled.value ? length(var.egress_with_ipv6_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -179,7 +193,7 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
 resource "aws_security_group_rule" "egress_with_self" {
-  count = "${var.create ? length(var.egress_with_self) : 0}"
+  count = "${module.enabled.value ? length(var.egress_with_self) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"

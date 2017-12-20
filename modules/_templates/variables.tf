@@ -1,8 +1,8 @@
 #################
 # Security group
 #################
-variable "create" {
-  description = "Whether to create security group and all rules"
+variable "enabled" {
+  description = "Set to false to prevent the module from creating anything"
   default     = true
 }
 

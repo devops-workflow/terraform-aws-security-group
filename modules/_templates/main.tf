@@ -1,7 +1,6 @@
 module "sg" {
-  source = "../../"
-
-  create      = "${var.create}"
+  source      = "../../"
+  enabled     = "${var.enabled}"
   name        = "${var.name}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"

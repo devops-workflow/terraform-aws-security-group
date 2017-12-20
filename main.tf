@@ -2,7 +2,9 @@
 # Security group
 #################
 resource "aws_security_group" "this" {
-  name = "${var.namespaced ? format("%s-%s", var.environment, var.name) : format("%s", var.name)}"
+  count = "${var.create}"
+
+  name        = "${var.name}"
   description = "${var.description}"
   vpc_id      = "${var.vpc_id}"
 
@@ -24,7 +26,7 @@ resource "aws_security_group" "this" {
 ###################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "ingress_rules" {
-  count = "${length(var.ingress_rules)}"
+  count = "${var.create ? length(var.ingress_rules) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -43,7 +45,7 @@ resource "aws_security_group_rule" "ingress_rules" {
 ##########################
 # Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
 resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
-  count = "${length(var.ingress_with_source_security_group_id)}"
+  count = "${var.create ? length(var.ingress_with_source_security_group_id) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -59,7 +61,7 @@ resource "aws_security_group_rule" "ingress_with_source_security_group_id" {
 
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
-  count = "${length(var.ingress_with_cidr_blocks)}"
+  count = "${var.create ? length(var.ingress_with_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -74,7 +76,7 @@ resource "aws_security_group_rule" "ingress_with_cidr_blocks" {
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
-  count = "${length(var.ingress_with_ipv6_cidr_blocks)}"
+  count = "${var.create ? length(var.ingress_with_ipv6_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -89,7 +91,7 @@ resource "aws_security_group_rule" "ingress_with_ipv6_cidr_blocks" {
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
 resource "aws_security_group_rule" "ingress_with_self" {
-  count = "${length(var.ingress_with_self)}"
+  count = "${var.create ? length(var.ingress_with_self) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "ingress"
@@ -112,7 +114,7 @@ resource "aws_security_group_rule" "ingress_with_self" {
 ##################################
 # Security group rules with "cidr_blocks" and it uses list of rules names
 resource "aws_security_group_rule" "egress_rules" {
-  count = "${length(var.egress_rules)}"
+  count = "${var.create ? length(var.egress_rules) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -131,7 +133,7 @@ resource "aws_security_group_rule" "egress_rules" {
 #########################
 # Security group rules with "source_security_group_id", but without "cidr_blocks" and "self"
 resource "aws_security_group_rule" "egress_with_source_security_group_id" {
-  count = "${length(var.egress_with_source_security_group_id)}"
+  count = "${var.create ? length(var.egress_with_source_security_group_id) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -147,7 +149,7 @@ resource "aws_security_group_rule" "egress_with_source_security_group_id" {
 
 # Security group rules with "cidr_blocks", but without "ipv6_cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "egress_with_cidr_blocks" {
-  count = "${length(var.egress_with_cidr_blocks)}"
+  count = "${var.create ? length(var.egress_with_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -162,7 +164,7 @@ resource "aws_security_group_rule" "egress_with_cidr_blocks" {
 
 # Security group rules with "ipv6_cidr_blocks", but without "cidr_blocks", "source_security_group_id" and "self"
 resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
-  count = "${length(var.egress_with_ipv6_cidr_blocks)}"
+  count = "${var.create ? length(var.egress_with_ipv6_cidr_blocks) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"
@@ -177,7 +179,7 @@ resource "aws_security_group_rule" "egress_with_ipv6_cidr_blocks" {
 
 # Security group rules with "self", but without "cidr_blocks" and "source_security_group_id"
 resource "aws_security_group_rule" "egress_with_self" {
-  count = "${length(var.egress_with_self)}"
+  count = "${var.create ? length(var.egress_with_self) : 0}"
 
   security_group_id = "${aws_security_group.this.id}"
   type              = "egress"

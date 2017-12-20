@@ -11,6 +11,11 @@ variable "namespaced" {
 #################
 # Security group
 #################
+variable "create" {
+  description = "Whether to create security group and all rules"
+  default     = true
+}
+
 variable "vpc_id" {
   description = "ID of the VPC where to create security group"
 }

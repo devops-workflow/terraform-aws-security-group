@@ -1,45 +1,45 @@
 
-output "id" {
+output "complete_id" {
   value       = "${module.complete_sg_disabled.id}"
 }
-output "vpc_id" {
+output "complete_vpc_id" {
   value       = "${module.complete_sg_disabled.vpc_id}"
 }
-output "owner_id" {
+output "complete_owner_id" {
   value       = "${module.complete_sg_disabled.owner_id}"
 }
-output "name" {
+output "complete_name" {
   value       = "${module.complete_sg_disabled.name}"
 }
-output "description" {
+output "complete_description" {
   value       = "${module.complete_sg_disabled.description}"
 }
-output "ingress" {
+output "complete_ingress" {
   value       = "${module.complete_sg_disabled.ingress}"
 }
-output "egress" {
+output "complete_egress" {
   value       = "${module.complete_sg_disabled.egress}"
 }
 
 
-output "id" {
+output "http_id" {
   value       = "${module.http_sg_disabled.id}"
 }
-output "vpc_id" {
+output "http_vpc_id" {
   value       = "${module.http_sg_disabled.vpc_id}"
 }
-output "owner_id" {
+output "http_owner_id" {
   value       = "${module.http_sg_disabled.owner_id}"
 }
-output "name" {
+output "http_name" {
   value       = "${module.http_sg_disabled.name}"
 }
-output "description" {
+output "http_description" {
   value       = "${module.http_sg_disabled.description}"
 }
-output "ingress" {
+output "http_ingress" {
   value       = "${module.http_sg_disabled.ingress}"
 }
-output "egress" {
+output "http_egress" {
   value       = "${module.http_sg_disabled.egress}"
 }

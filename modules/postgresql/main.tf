@@ -1,11 +1,16 @@
 module "sg" {
-  source = "../../"
-
-  create      = "${var.create}"
-  name        = "${var.name}"
-  description = "${var.description}"
-  vpc_id      = "${var.vpc_id}"
-  tags        = "${var.tags}"
+  source        = "../../"
+  enabled       = "${var.enabled}"
+  name          = "${var.name}"
+  description   = "${var.description}"
+  vpc_id        = "${var.vpc_id}"
+  attributes    = "${var.attributes}"
+  delimiter     = "${var.delimiter}"
+  environment   = "${var.environment}"
+  namespace-env = "${var.namespace-env}"
+  namespace-org = "${var.namespace-org}"
+  organization  = "${var.organization}"
+  tags          = "${var.tags}"
 
   ##########
   # Ingress

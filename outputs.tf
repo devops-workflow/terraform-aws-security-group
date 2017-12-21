@@ -23,13 +23,12 @@ output "description" {
   value       = "${element(concat(aws_security_group.this.*.description, list("")), 0)}"
 }
 
-//output "ingress" {
-//  description = "The ingress rules"
-//  value       = "${element(concat(aws_security_group.this.*.ingress, list("")), 0)}"
-//}
+output "ingress" {
+  description = "The ingress rules"
+  value       = "${aws_security_group.this.*.ingress}"
+}
 
-
-//output "egress" {
-//  description = "The egress rules"
-//    value       = "${element(concat(aws_security_group.this.*.egress, list("")), 0)"
-//}
+output "egress" {
+  description = "The egress rules"
+    value       = "${aws_security_group.this.*.egress}"
+}

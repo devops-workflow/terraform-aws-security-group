@@ -1,17 +1,14 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-west-2"
 }
 
 #############################################################
 # Data sources to get VPC and default security group details
 #############################################################
 data "aws_vpc" "default" {
-  default = true
-}
-
-data "aws_security_group" "default" {
-  name   = "default"
-  vpc_id = "${data.aws_vpc.default.id}"
+  tags {
+    Environment = "one"
+  }
 }
 
 ########################################################

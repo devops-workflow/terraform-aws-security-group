@@ -130,7 +130,7 @@ variable "rules" {
     all-ipv6-icmp = [-1, -1, 58, "All IPV6 ICMP"]
 
     # This is a fallback rule to pass to lookup() as default. It does not open anything, because it should never be used.
-    _ = ["", "", ""]
+    _ = ["", "", "", ""]
   }
 }
 

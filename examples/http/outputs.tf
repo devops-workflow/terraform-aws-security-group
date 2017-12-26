@@ -21,6 +21,12 @@ output "http_ingress" {
 output "http_egress" {
   value       = "${module.http_sg.egress}"
 }
+output "http_egress_rules_ids" {
+  value       = "${module.http_sg.egress_rules_ids}"
+}
+output "http_ingress_rules_ids" {
+  value       = "${module.http_sg.ingress_rules_ids}"
+}
 
 
 output "http_mysql_1_id" {

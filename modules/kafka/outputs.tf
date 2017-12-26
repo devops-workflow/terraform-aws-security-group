@@ -32,3 +32,11 @@ output "egress" {
   description = "The egress rules"
   value       = "${module.sg.egress}"
 }
+
+output "egress_rules_ids" {
+  value = "${module.sg.egress_rules_ids}"
+}
+
+output "ingress_rules_ids" {
+  value = "${module.sg.ingress_rules_ids}"
+}

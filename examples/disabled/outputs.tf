@@ -20,7 +20,9 @@ output "complete_ingress" {
 output "complete_egress" {
   value       = "${module.complete_sg_disabled.egress}"
 }
-
+output "complete_ingress_rules_ids" {
+  value       = "${module.complete_sg_disabled.ingress_rules_ids}"
+}
 
 output "http_id" {
   value       = "${module.http_sg_disabled.id}"

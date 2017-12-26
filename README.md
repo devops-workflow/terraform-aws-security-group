@@ -102,7 +102,8 @@ Rules and groups are defined in [rules.tf](rules.tf). Run `update_groups.sh` whe
 Authors
 -------
 
-This fork managed by [Steven Nemetz](https://github.com/snemetz)
+This fork managed by [Steven Nemetz](https://github.com/snemetz).
+
 Upstream module managed by [Anton Babenko](https://github.com/antonbabenko).
 
 License

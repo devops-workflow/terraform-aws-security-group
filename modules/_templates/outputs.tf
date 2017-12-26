@@ -22,3 +22,13 @@ output "description" {
   description = "The description of the security group"
   value       = "${module.sg.description}"
 }
+
+output "ingress" {
+  description = "The ingress rules"
+  value       = "${module.sg.ingress}"
+}
+
+output "egress" {
+  description = "The egress rules"
+    value       = "${module.sg.egress}"
+}

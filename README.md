@@ -19,9 +19,9 @@ This module aims to implement **ALL** combinations of arguments supported by AWS
 * Named groups of rules with ingress (inbound) and egress (outbound) ports open for common scenarios (eg, [ssh](modules/ssh), [http-80](modules/http-80), [mysql](modules/mysql), see the whole list [here](modules/README.md))
 * Conditionally create security group and all required security group rules ("single boolean switch").
 
-Ingress and egress rules can be configured in a variety of ways as listed on [the registry documentation](https://registry.terraform.io/modules/terraform-aws-modules/security-group/aws/?tab=inputs).
+Ingress and egress rules can be configured in a variety of ways as listed on [the registry documentation](https://registry.terraform.io/modules/devops-workflow/security-group/aws/?tab=inputs).
 
-If there is a missing feature or a bug - [open an issue](https://github.com/terraform-aws-modules/terraform-aws-security-group/issues/new).
+If there is a missing feature or a bug - [open an issue](https://github.com/devops-workflow/terraform-aws-security-group/issues/new).
 
 Usage
 -----
@@ -32,7 +32,7 @@ There are two ways to create security groups using this module:
 
 ```hcl
 module "vote_service_sg" {
-  source = "terraform-aws-modules/security-group/aws"
+  source = "devops-workflow/security-group/aws"
 
   name        = "user-service"
   description = "Security group for user-service with custom ports open within VPC, and PostgreSQL publicly open"
@@ -62,7 +62,7 @@ module "vote_service_sg" {
 
 ```hcl
 module "web_server_sg" {
-  source = "terraform-aws-modules/security-group/aws//modules/http"
+  source = "devops-workflow/security-group/aws//modules/http"
 
   name        = "web-server"
   description = "Security group for web-server with HTTP ports open within VPC"
@@ -75,14 +75,14 @@ module "web_server_sg" {
 Conditional creation
 --------------------
 
-Sometimes you need to have a way to create security group conditionally but Terraform does not allow to use `count` inside `module` block, so the solution is to specify argument `create`.
+Sometimes you need to have a way to create security group conditionally but Terraform does not allow to use `count` inside `module` block, so the solution is to specify argument `enabled`.
 
 ```hcl
 # This security group will not be created
 module "vote_service_sg" {
-  source = "terraform-aws-modules/security-group/aws"
+  source = "devops-workflow/security-group/aws"
 
-  create = false
+  enabled = false
   # ... omitted
 }
 ```
@@ -90,9 +90,9 @@ module "vote_service_sg" {
 Examples
 --------
 
-* [Complete Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/complete) shows all available parameters to configure security group.
-* [HTTP Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/http) shows more applicable security groups for common web-servers.
-* [Disable creation of Security Group example](https://github.com/terraform-aws-modules/terraform-aws-security-group/tree/master/examples/disabled) shows how to disable creation of security group.
+* [Complete Security Group example](https://github.com/devops-workflow/terraform-aws-security-group/tree/master/examples/complete) shows all available parameters to configure security group.
+* [HTTP Security Group example](https://github.com/devops-workflow/terraform-aws-security-group/tree/master/examples/http) shows more applicable security groups for common web-servers.
+* [Disable creation of Security Group example](https://github.com/devops-workflow/terraform-aws-security-group/tree/master/examples/disabled) shows how to disable creation of security group.
 
 How to add/update rules/groups?
 -------------------------------
@@ -102,7 +102,8 @@ Rules and groups are defined in [rules.tf](rules.tf). Run `update_groups.sh` whe
 Authors
 -------
 
-Module managed by [Anton Babenko](https://github.com/antonbabenko).
+This fork managed by [Steven Nemetz](https://github.com/snemetz)
+Upstream module managed by [Anton Babenko](https://github.com/antonbabenko).
 
 License
 -------

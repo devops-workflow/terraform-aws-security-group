@@ -20,6 +20,9 @@ output "complete_ingress" {
 output "complete_egress" {
   value       = "${module.complete_sg_disabled.egress}"
 }
+output "complete_egress_rules_ids" {
+  value       = "${module.complete_sg_disabled.egress_rules_ids}"
+}
 output "complete_ingress_rules_ids" {
   value       = "${module.complete_sg_disabled.ingress_rules_ids}"
 }
@@ -44,4 +47,10 @@ output "http_ingress" {
 }
 output "http_egress" {
   value       = "${module.http_sg_disabled.egress}"
+}
+output "http_egress_rules_ids" {
+  value       = "${module.http_sg_disabled.egress_rules_ids}"
+}
+output "http_ingress_rules_ids" {
+  value       = "${module.http_sg_disabled.ingress_rules_ids}"
 }

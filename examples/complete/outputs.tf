@@ -20,6 +20,12 @@ output "complete_ingress" {
 output "complete_egress" {
   value       = "${module.complete_sg.egress}"
 }
+output "complete_egress_rules_ids" {
+  value       = "${module.complete_sg.egress_rules_ids}"
+}
+output "complete_ingress_rules_ids" {
+  value       = "${module.complete_sg.ingress_rules_ids}"
+}
 
 # ipv4_ipv6_example
 output "ipv4_ipv6_id" {
@@ -42,4 +48,10 @@ output "ipv4_ipv6_ingress" {
 }
 output "ipv4_ipv6_egress" {
   value       = "${module.ipv4_ipv6_example.egress}"
+}
+output "ipv4_ipv6_egress_rules_ids" {
+  value       = "${module.ipv4_ipv6_example.egress_rules_ids}"
+}
+output "ipv4_ipv6_ingress_rules_ids" {
+  value       = "${module.ipv4_ipv6_example.ingress_rules_ids}"
 }

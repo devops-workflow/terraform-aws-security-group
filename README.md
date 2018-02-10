@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/devops-workflow/terraform-aws-security-group?style=svg)](https://circleci.com/gh/devops-workflow/terraform-aws-security-group)
+
 AWS EC2-VPC Security Group Terraform module
 ===========================================
 

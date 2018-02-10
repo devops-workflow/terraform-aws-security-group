@@ -41,8 +41,10 @@ variable "rules" {
     # ELK - Elasticsearch
     elasticsearch-rest-tcp = [9200, 9200, "tcp", "Elasticsearch REST interface"]
     elasticsearch-java-tcp = [9300, 9300, "tcp", "Elasticsearch Java interface"]
+
     # ELK - Kibana
     kibana-tcp = [9000, 9000, "tcp", "Kibana"]
+
     # ELK - Logstash
     logstash-tcp = [5043, 5044, "tcp", "Logstash"]
 
@@ -67,7 +69,7 @@ variable "rules" {
     memcached-tcp = [11211, 11211, "tcp", "Memcached"]
 
     # MongoDB
-    mongodb-tcp   = [27017, 27017, "tcp", "MongoDB"]
+    mongodb-tcp = [27017, 27017, "tcp", "MongoDB"]
 
     # MySQL
     mysql-tcp = [3306, 3306, "tcp", "MySQL/Aurora"]

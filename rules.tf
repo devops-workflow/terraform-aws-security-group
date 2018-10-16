@@ -98,7 +98,7 @@ variable "rules" {
     puppet-tcp = [8140, 8140, "tcp", "Puppet"]
 
     # RabbitMQ
-    rabbitmq-mgmt = [15672, 15672, "tcp", "RabbitMQ Manangement"]
+    rabbitmq-mgmt  = [15672, 15672, "tcp", "RabbitMQ Manangement"]
     rabbitmq-nodes = [5672, 5672, "tcp", "RabbitMQ"]
 
     # Redis

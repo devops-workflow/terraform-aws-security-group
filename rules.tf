@@ -97,6 +97,10 @@ variable "rules" {
     # Puppet
     puppet-tcp = [8140, 8140, "tcp", "Puppet"]
 
+    # RabbitMQ
+    rabbitmq-mgmt = [15672, 15672, "tcp", "RabbitMQ Manangement"]
+    rabbitmq-nodes = [5672, 5672, "tcp", "RabbitMQ"]
+
     # Redis
     redis-tcp = [6379, 6379, "tcp", "Redis"]
 
@@ -240,6 +244,12 @@ variable "auto_groups" {
 
     postgresql = {
       ingress_rules     = ["postgresql-tcp"]
+      ingress_with_self = ["all-all"]
+      egress_rules      = ["all-all"]
+    }
+
+    rabbitmq = {
+      ingress_rules     = ["rabbitmq-mgmt", "rabbitmq-nodes"]
       ingress_with_self = ["all-all"]
       egress_rules      = ["all-all"]
     }
